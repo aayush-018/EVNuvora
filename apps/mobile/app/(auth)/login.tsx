@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Input, Button } from '../../components/ui';
 import { colors, spacing, typography } from '../../theme';
 import { useAuthStore } from '../../store/auth.store';
+import { api } from '../../services/api';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -23,24 +24,21 @@ export default function LoginScreen() {
     setLoading(true);
 
     try {
-      // Direct mock fallback for Phase 1 UI verify
-      setAuth(
-        {
-          id: 'mock-user-1',
-          email,
-          phone: '+919876543210',
-          fullName: 'Demo Driver',
-          avatarUrl: null,
-          role: 'driver_host',
-          isVerified: true,
-          createdAt: new Date().toISOString(),
-        },
-        'mock-access-token',
-        'mock-refresh-token'
-      );
-      router.replace('/(driver)/(home)');
-    } catch {
-      setError('Login failed. Please check credentials.');
+      const response = await api.post('/auth/login', {
+        email: email.trim().toLowerCase(),
+        password,
+      });
+
+      if (response.data?.success && response.data?.data) {
+        const { user, tokens } = response.data.data;
+        setAuth(user, tokens.accessToken, tokens.refreshToken);
+        router.replace(user.role === 'host' ? '/(host)/dashboard' : '/(driver)/(home)');
+      } else {
+        throw new Error('Invalid response structure');
+      }
+    } catch (err: any) {
+      const msg = err.response?.data?.error?.message || err.message || 'Login failed. Please check credentials.';
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -54,7 +52,7 @@ export default function LoginScreen() {
       {error && <Text style={styles.errorBanner}>{error}</Text>}
 
       <Input
-        label="Email or Phone Number"
+        label="Email Address"
         placeholder="e.g. driver@example.com"
         value={email}
         onChangeText={setEmail}
@@ -78,12 +76,19 @@ export default function LoginScreen() {
         style={styles.loginBtn}
       />
 
-      <View style={styles.footer}>
+      <View style={styles.footerRow}>
         <Text style={styles.footerText}>Don't have an account? </Text>
         <TouchableOpacity onPress={() => router.push('/(auth)/register')}>
-          <Text style={styles.signupText}>Sign up</Text>
+          <Text style={styles.signupLink}>Sign Up</Text>
         </TouchableOpacity>
       </View>
+
+      <TouchableOpacity
+        style={styles.guestLink}
+        onPress={() => router.replace('/(driver)/(home)')}
+      >
+        <Text style={styles.guestText}>Continue as Guest</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -92,7 +97,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    padding: spacing.xl,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.huge,
   },
   heading: {
     fontSize: typography.sizes.xxl,
@@ -116,18 +122,28 @@ const styles = StyleSheet.create({
   loginBtn: {
     marginTop: spacing.md,
   },
-  footer: {
+  footerRow: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: spacing.xxl,
+    alignItems: 'center',
+    marginTop: spacing.xl,
   },
   footerText: {
+    fontSize: typography.sizes.sm,
     color: colors.textSecondary,
-    fontSize: typography.sizes.sm,
   },
-  signupText: {
-    color: colors.primary,
-    fontWeight: typography.weights.semibold,
+  signupLink: {
     fontSize: typography.sizes.sm,
+    color: colors.primary,
+    fontWeight: typography.weights.bold,
+  },
+  guestLink: {
+    alignItems: 'center',
+    marginTop: spacing.lg,
+    paddingVertical: spacing.sm,
+  },
+  guestText: {
+    fontSize: typography.sizes.xs,
+    color: colors.textSecondary,
   },
 });
