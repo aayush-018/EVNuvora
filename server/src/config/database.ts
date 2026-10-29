@@ -12,7 +12,7 @@
  * 3. Better control over transactions and performance
  */
 
-import { Pool } from 'pg';
+import { Pool, QueryResultRow } from 'pg';
 import { env, isProduction } from './env';
 import { logger } from '../utils/logger';
 
@@ -48,7 +48,7 @@ pool.on('error', (err) => {
  * const result = await query('SELECT * FROM users WHERE id = $1', [userId]);
  * const user = result.rows[0];
  */
-export async function query<T = any>(text: string, params?: any[]) {
+export async function query<T extends QueryResultRow = any>(text: string, params?: any[]) {
   const start = Date.now();
   const result = await pool.query<T>(text, params);
   const duration = Date.now() - start;
