@@ -10,19 +10,22 @@ import { healthRoutes } from './health.routes';
 import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import vehicleRoutes from './vehicle.routes';
+import chargerRoutes from './charger.routes';
 
 const router = Router();
 
 // Health check — no authentication required
 router.use('/health', healthRoutes);
 
-// Phase 2 Routes
+// Phase 2 Routes: Auth, User Profiles, Vehicles
 router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/vehicles', vehicleRoutes);
 
-// Phase 3+ routes will be added in upcoming phases:
-// router.use('/chargers', chargerRoutes);
+// Phase 3 Routes: Chargers & PostGIS Spatial Search
+router.use('/chargers', chargerRoutes);
+
+// Future Phase Routes:
 // router.use('/bookings', bookingRoutes);
 // router.use('/payments', paymentRoutes);
 // router.use('/reviews', reviewRoutes);
