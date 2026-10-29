@@ -1,0 +1,25 @@
+# Optional: Run PostgreSQL + PostGIS locally via Docker
+# Only needed if you don't use a managed database like Neon
+version: '3.8'
+
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    container_name: chargekaro-db
+    environment:
+      POSTGRES_DB: chargekaro
+      POSTGRES_USER: chargekaro
+      POSTGRES_PASSWORD: chargekaro_dev_password
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: chargekaro-redis
+    ports:
+      - '6379:6379'
+
+volumes:
+  pgdata:
