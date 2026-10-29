@@ -26,7 +26,7 @@ export default function ProfileScreen() {
           <Text style={styles.avatarText}>{user?.fullName?.[0] || 'U'}</Text>
         </View>
         <Text style={styles.name}>{user?.fullName || 'EV Driver'}</Text>
-        <Text style={styles.contact}>{user?.email || 'driver@chargekaro.in'}</Text>
+        <Text style={styles.contact}>{user?.email || 'driver@EVNuvora.in'}</Text>
         <Badge label="Verified Driver" variant="success" style={styles.badge} />
       </Card>
 

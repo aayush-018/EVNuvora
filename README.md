@@ -1,8 +1,8 @@
-# ⚡ ChargeKaro
+# ⚡ EVNuvora
 
 **India's EV Charging Marketplace** — *"Charge kar, tension chhod"*
 
-ChargeKaro helps EV drivers discover compatible charging stations, book time slots, and pay securely. Charger owners can list their private or commercial chargers for shared use.
+EVNuvora helps EV drivers discover compatible charging stations, book time slots, and pay securely. Charger owners can list their private or commercial chargers for shared use.
 
 ## 🏗️ Project Structure
 

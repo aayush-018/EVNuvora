@@ -27,7 +27,7 @@ export default function SplashScreen() {
       <View style={styles.logoBadge}>
         <Text style={styles.logoIcon}>⚡</Text>
       </View>
-      <Text style={styles.title}>ChargeKaro</Text>
+      <Text style={styles.title}>EVNuvora</Text>
       <Text style={styles.subtitle}>Charge kar, tension chhod</Text>
     </View>
   );

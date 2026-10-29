@@ -1,5 +1,5 @@
 /**
- * ChargeKaro Design System - Colors
+ * EVNuvora Design System - Colors
  * High-contrast, accessibility-checked colors tailored for Indian EV mobility.
  */
 export const colors = {

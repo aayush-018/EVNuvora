@@ -6,7 +6,7 @@ export default function App() {
       <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: '1rem', marginBottom: '2rem' }}>
         <div>
           <h1 style={{ margin: 0, color: '#00B86B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>⚡</span> ChargeKaro Admin Console
+            <span>⚡</span> EVNuvora Admin Console
           </h1>
           <p style={{ margin: '0.25rem 0 0 0', color: '#64748b' }}>Operations, Listing Moderation, Disputes & Audit</p>
         </div>

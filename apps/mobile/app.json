@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "ChargeKaro",
-    "slug": "chargekaro",
+    "name": "EVNuvora",
+    "slug": "EVNuvora",
     "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme": "chargekaro",
+    "scheme": "EVNuvora",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -14,14 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.chargekaro.app"
+      "bundleIdentifier": "com.EVNuvora.app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1A1A2E"
       },
-      "package": "com.chargekaro.app"
+      "package": "com.EVNuvora.app"
     },
     "web": {
       "bundler": "metro",
@@ -33,7 +33,7 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "ChargeKaro uses your location to show compatible EV charging stations near you."
+          "locationAlwaysAndWhenInUsePermission": "EVNuvora uses your location to show compatible EV charging stations near you."
         }
       ]
     ],

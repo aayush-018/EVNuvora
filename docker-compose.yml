@@ -5,11 +5,11 @@ version: '3.8'
 services:
   postgres:
     image: postgis/postgis:16-3.4
-    container_name: chargekaro-db
+    container_name: EVNuvora-db
     environment:
-      POSTGRES_DB: chargekaro
-      POSTGRES_USER: chargekaro
-      POSTGRES_PASSWORD: chargekaro_dev_password
+      POSTGRES_DB: EVNuvora
+      POSTGRES_USER: EVNuvora
+      POSTGRES_PASSWORD: EVNuvora_dev_password
     ports:
       - '5432:5432'
     volumes:
@@ -17,7 +17,7 @@ services:
 
   redis:
     image: redis:7-alpine
-    container_name: chargekaro-redis
+    container_name: EVNuvora-redis
     ports:
       - '6379:6379'
 

@@ -1,5 +1,5 @@
 {
-  "name": "@chargekaro/server",
+  "name": "@EVNuvora/server",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "db:reset": "tsx src/db/migrate.ts --reset && tsx src/db/seeds/seed.ts"
   },
   "dependencies": {
-    "@chargekaro/shared": "*",
+    "@EVNuvora/shared": "*",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.0",

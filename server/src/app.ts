@@ -1,5 +1,5 @@
 /**
- * ChargeKaro API Server
+ * EVNuvora API Server
  * 
  * This is the main entry point for the backend.
  * It sets up Express with all middleware and routes,
@@ -48,7 +48,7 @@ app.use(`/api/${env.API_VERSION}`, v1Routes);
 // Root endpoint — basic API info
 app.get('/', (_req, res) => {
   res.json({
-    name: 'ChargeKaro API',
+    name: 'EVNuvora API',
     version: '0.1.0',
     description: "India's EV Charging Marketplace",
     docs: `/api/${env.API_VERSION}/health`,
@@ -83,7 +83,7 @@ async function start() {
   app.listen(env.PORT, () => {
     logger.info(
       { port: env.PORT, env: env.NODE_ENV },
-      `⚡ ChargeKaro API running on http://localhost:${env.PORT}`,
+      `⚡ EVNuvora API running on http://localhost:${env.PORT}`,
     );
     logger.info(`📚 API: http://localhost:${env.PORT}/api/${env.API_VERSION}/health`);
   });

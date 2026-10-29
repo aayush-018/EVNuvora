@@ -1,8 +1,8 @@
 {
-  "name": "chargekaro",
+  "name": "EVNuvora",
   "version": "0.1.0",
   "private": true,
-  "description": "ChargeKaro - India's EV Charging Marketplace",
+  "description": "EVNuvora - India's EV Charging Marketplace",
   "workspaces": [
     "packages/*",
     "apps/*",

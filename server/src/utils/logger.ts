@@ -45,7 +45,7 @@ export const logger = pino({
 
   // Base fields included in every log entry
   base: {
-    service: 'chargekaro-api',
+    service: 'EVNuvora-api',
     env: env.NODE_ENV,
   },
 });
