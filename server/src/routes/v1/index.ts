@@ -12,6 +12,7 @@ import userRoutes from './user.routes';
 import vehicleRoutes from './vehicle.routes';
 import chargerRoutes from './charger.routes';
 import bookingRoutes from './booking.routes';
+import adminRoutes from './admin.routes';
 
 const router = Router();
 
@@ -28,5 +29,8 @@ router.use('/chargers', chargerRoutes);
 
 // Phase 6 & 7 Routes: Bookings State Machine & Payments
 router.use('/bookings', bookingRoutes);
+
+// Phase 8 Routes: Admin Review, Metrics & Moderation
+router.use('/admin', adminRoutes);
 
 export { router as v1Routes };
