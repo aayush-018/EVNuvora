@@ -14,7 +14,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.evnuvora.in/api/v1"
+        "EXPO_PUBLIC_API_URL": "https://evnuvora-api.onrender.com/api/v1"
       }
     },
     "production": {
@@ -23,7 +23,7 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.evnuvora.in/api/v1"
+        "EXPO_PUBLIC_API_URL": "https://evnuvora-api.onrender.com/api/v1"
       }
     }
   },
@@ -31,3 +31,5 @@
     "production": {}
   }
 }
+
+
