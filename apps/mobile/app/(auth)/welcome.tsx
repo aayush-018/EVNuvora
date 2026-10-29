@@ -6,7 +6,6 @@ import { colors, spacing, typography } from '../../theme';
 
 export default function WelcomeScreen() {
   const router = useRouter();
-
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -42,7 +41,6 @@ export default function WelcomeScreen() {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

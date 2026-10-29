@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "scheme": "EVNuvora",
+    "scheme": "evnuvora",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -38,6 +38,14 @@
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "EVNuvora uses your location to show compatible EV charging stations near you."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.9.25"
+          }
         }
       ]
     ],
