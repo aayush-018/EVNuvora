@@ -1,9 +1,5 @@
 /**
- * EVNuvora API Server
- * 
- * This is the main entry point for the backend.
- * It sets up Express with all middleware and routes,
- * then starts listening for requests.
+ * EVNuvora API Server - Production Hardened
  */
 
 import express from 'express';
@@ -11,7 +7,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { env } from './config/env';
 import { corsOptions } from './config/cors';
-import { testConnection } from './config/database';
+import { pool, testConnection } from './config/database';
 import { generalLimiter } from './middleware/rateLimiter.middleware';
 import { errorHandler } from './middleware/errorHandler.middleware';
 import { v1Routes } from './routes/v1';
@@ -19,43 +15,46 @@ import { logger } from './utils/logger';
 
 const app = express();
 
-// --- Security Middleware ---
-// helmet() sets various HTTP security headers (e.g., X-Content-Type-Options,
-// X-Frame-Options) to protect against common web vulnerabilities.
-app.use(helmet());
+// Trust reverse proxy (Railway, Render, AWS ALB, Nginx, Cloudflare)
+// Essential for rate-limiting, secure cookies, and accurate client IP logging behind HTTPS termination
+app.set('trust proxy', 1);
 
-// CORS — controls which origins can access the API
+// Security Headers
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: 'cross-origin' }
+}));
+
+// CORS
 app.use(cors(corsOptions));
 
-// Parse JSON request bodies (limit size to prevent abuse)
+// Body parsing with sane size limits
 app.use(express.json({ limit: '10mb' }));
-
-// Parse URL-encoded form data
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting — applied to all routes
+// Rate limiting
 app.use(generalLimiter);
 
-// Request logging
+// Request logger
 app.use((req, _res, next) => {
   logger.info({ method: req.method, url: req.url }, 'Incoming request');
   next();
 });
 
-// --- API Routes ---
+// API Routes
 app.use(`/api/${env.API_VERSION}`, v1Routes);
 
-// Root endpoint — basic API info
+// Root info endpoint
 app.get('/', (_req, res) => {
   res.json({
     name: 'EVNuvora API',
     version: '0.1.0',
     description: "India's EV Charging Marketplace",
-    docs: `/api/${env.API_VERSION}/health`,
+    status: 'online',
+    health: `/api/${env.API_VERSION}/health`,
   });
 });
 
-// 404 handler for unmatched routes
+// 404 handler
 app.use((_req, res) => {
   res.status(404).json({
     success: false,
@@ -66,27 +65,47 @@ app.use((_req, res) => {
   });
 });
 
-// Centralized error handler — must be last
+// Central error handler
 app.use(errorHandler);
 
-// --- Start Server ---
+// Start Server & Graceful Shutdown management
 async function start() {
-  // Test database connection before accepting requests
   const dbConnected = await testConnection();
-  
   if (!dbConnected) {
     logger.error('Cannot start server: database connection failed');
-    logger.info('Check your DATABASE_URL in .env file');
     process.exit(1);
   }
 
-  app.listen(env.PORT, () => {
+  const server = app.listen(env.PORT, () => {
     logger.info(
       { port: env.PORT, env: env.NODE_ENV },
-      `⚡ EVNuvora API running on http://localhost:${env.PORT}`,
+      `⚡ EVNuvora API running on port ${env.PORT}`,
     );
-    logger.info(`📚 API: http://localhost:${env.PORT}/api/${env.API_VERSION}/health`);
   });
+
+  const shutdown = async (signal: string) => {
+    logger.info({ signal }, 'Received termination signal. Closing HTTP server & database pool gracefully...');
+    server.close(async () => {
+      logger.info('HTTP server closed.');
+      try {
+        await pool.end();
+        logger.info('Database pool drained successfully.');
+        process.exit(0);
+      } catch (err) {
+        logger.error({ err }, 'Error during database pool closure');
+        process.exit(1);
+      }
+    });
+
+    // Force close after 10 seconds if hanging
+    setTimeout(() => {
+      logger.error('Forced shutdown due to timeout');
+      process.exit(1);
+    }, 10000);
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }
 
 start().catch((err) => {

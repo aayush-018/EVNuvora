@@ -6,7 +6,7 @@
  * that property so you get autocompletion and type checking.
  */
 
-import { UserRole } from '@chargekaro/shared';
+import { UserRole } from '@evnuvora/shared';
 
 declare global {
   namespace Express {

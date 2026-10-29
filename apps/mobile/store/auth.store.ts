@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UserProfile, UserRole } from '@chargekaro/shared';
+import { UserProfile, UserRole } from '@evnuvora/shared';
 
 interface AuthState {
   user: UserProfile | null;
