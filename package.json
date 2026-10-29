@@ -9,6 +9,7 @@
     "server"
   ],
   "scripts": {
+    "build": "npm run build:server && npm run build:admin",
     "mobile": "npm run dev --workspace=apps/mobile",
     "server": "npm run dev --workspace=server",
     "admin": "npm run dev --workspace=apps/admin",
@@ -28,5 +29,9 @@
   },
   "engines": {
     "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.5",
+    "@neon/env": "^1.6.6"
   }
 }

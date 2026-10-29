@@ -46,3 +46,4 @@ ios/
 # Secrets - NEVER commit these
 *.pem
 *.key
+.neon
