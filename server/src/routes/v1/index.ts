@@ -11,6 +11,7 @@ import authRoutes from './auth.routes';
 import userRoutes from './user.routes';
 import vehicleRoutes from './vehicle.routes';
 import chargerRoutes from './charger.routes';
+import bookingRoutes from './booking.routes';
 
 const router = Router();
 
@@ -22,17 +23,10 @@ router.use('/auth', authRoutes);
 router.use('/users', userRoutes);
 router.use('/vehicles', vehicleRoutes);
 
-// Phase 3 Routes: Chargers & PostGIS Spatial Search
+// Phase 3 & 5 Routes: Chargers & PostGIS Spatial Search
 router.use('/chargers', chargerRoutes);
 
-// Future Phase Routes:
-// router.use('/bookings', bookingRoutes);
-// router.use('/payments', paymentRoutes);
-// router.use('/reviews', reviewRoutes);
-// router.use('/favorites', favoriteRoutes);
-// router.use('/reports', reportRoutes);
-// router.use('/notifications', notificationRoutes);
-// router.use('/support', supportRoutes);
-// router.use('/admin', adminRoutes);
+// Phase 6 & 7 Routes: Bookings State Machine & Payments
+router.use('/bookings', bookingRoutes);
 
 export { router as v1Routes };
