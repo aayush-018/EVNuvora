@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Input, Button } from '../../components/ui';
 import { colors, spacing, typography } from '../../theme';
@@ -46,6 +46,13 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.brandRow}>
+        <Image
+          source={require('../../assets/evnuvora-mark.png')}
+          style={styles.brandLogo}
+          resizeMode="contain"
+        />
+      </View>
       <Text style={styles.heading}>Welcome Back</Text>
       <Text style={styles.subheading}>Enter your credentials to manage EV charging & bookings</Text>
 
@@ -99,6 +106,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.huge,
+  },
+  brandRow: {
+    alignItems: 'center',
+    marginBottom: spacing.lg,
+  },
+  brandLogo: {
+    width: 140,
+    height: 60,
   },
   heading: {
     fontSize: typography.sizes.xxl,

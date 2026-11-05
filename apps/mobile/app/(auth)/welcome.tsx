@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button } from '../../components/ui';
 import { colors, spacing, typography } from '../../theme';
@@ -9,8 +9,12 @@ export default function WelcomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <View style={styles.heroCircle}>
-          <Text style={styles.heroEmoji}>🔋</Text>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('../../assets/evnuvora-logo.png')}
+            style={styles.logoImage}
+            resizeMode="contain"
+          />
         </View>
         <Text style={styles.title}>India's Smart EV Network</Text>
         <Text style={styles.description}>
@@ -54,17 +58,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  heroCircle: {
-    width: 96,
-    height: 96,
-    borderRadius: 48,
-    backgroundColor: colors.primarySoft,
+  logoContainer: {
+    width: 280,
+    height: 120,
+    marginBottom: spacing.xxl,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: spacing.xxl,
   },
-  heroEmoji: {
-    fontSize: 48,
+  logoImage: {
+    width: '100%',
+    height: '100%',
   },
   title: {
     fontSize: typography.sizes.xxl,

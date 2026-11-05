@@ -52,12 +52,15 @@ export default function App() {
 
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
-      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: '1rem', marginBottom: '2rem' }}>
-        <div>
-          <h1 style={{ margin: 0, color: '#00B86B', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>⚡</span> EVNuvora Admin Console
-          </h1>
-          <p style={{ margin: '0.25rem 0 0 0', color: '#64748b' }}>Operations, PostGIS Listings, Verification & Moderation</p>
+      <header style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #e2e8f0', paddingBottom: '1.25rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <img src="/evnuvora-mark.png" alt="EVNuvora Logo" style={{ height: '48px', width: 'auto', objectFit: 'contain' }} />
+          <div>
+            <h1 style={{ margin: 0, color: '#0f172a', fontSize: '1.5rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              EVNuvora Admin Console
+            </h1>
+            <p style={{ margin: '0.25rem 0 0 0', color: '#64748b' }}>Operations, PostGIS Listings, Verification & Moderation</p>
+          </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
           <button
